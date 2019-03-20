@@ -62,18 +62,20 @@ pairs(datasetdf[3:ncol(datasetdf)] , panel=panel.smooth)
 lm.fit_f =lm(gdp~exp , data= dataset )
 summary(lm.fit_f)
 # The coefficient exp is significant to explain gdp. 
-# Also the model is good prediction for F-statistic very large and p-value is significant, 
-# This model is a good fit.
+# Also the model is good prediction for F-statistic very large and p-value is significant, thus they strongly proved the relationship 
+# However, the adjusted R-squared = 0.2879 < 0.5 This model is not exactly a good fit.
 
 #3g/ Multiple regression model to predict gdp:
 lm.fit_g <- lm(gdp~dataset$exp+dataset$epg+ dataset$hpr+ dataset$gdpus+ dataset$oil+ dataset$crd, data= dataset )
 summary(lm.fit_g)
 # The coefficients exp, wpg, hpr is significant for the model.
 # Oil, gdpus, crd is insignificant coefficients for the model.
-# The F-statistic states the fitness of data is lower in this model, however, the R squared is higher than the single regression of exp.
-lm.fit_g <- lm(gdp~exp+epg+hpr, data= dataset) #remove insignificant variable out of model
-summary(lm.fit_g)
-#After we remove Oil, gdpus, crd, the F-statistic of the later model have increase significiantly.
+# The F-statistic states the fitness of data is lower in this model.
+# However, the R squared is higher than the single regression of exp state a better fit, but still less than 0.5
+lm.fit_g_adj <- lm(gdp~exp+epg+hpr, data= dataset) #remove insignificant variable out of model
+summary(lm.fit_g_adj)
+#After we remove Oil, gdpus, crd, the F-statistic of the later model have increased to 20.71
+# The R squared is also increase to 0.3517, still <0.5.
 
 #3h/ 
 #Calculate the 5% quantile of gdp
