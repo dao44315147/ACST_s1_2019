@@ -4,12 +4,10 @@
 ssh -i 44315147.pem ubuntu@ec2-54-206-36-120.ap-southeast-2.compute.amazonaws.com
 #replace with your .pem
 
-# Then, download the file by using#The file is now executable and editable.
-#Next we use,  we open Vim editor.
-vim  chapter-10-shell-programming--triplet-stop.sh
-#Then, we edit : || [${1:$x:3} == tga ] into && [ $x >= 6 ]
+# Then, download the file by using
 wget 'https://www.staff.hs-mittweida.de/~wuenschi/data/media/compbiolbook/chapter-10-shell-programming--triplet-stop.sh'
-#Finally, check by using line: ls.
+
+#Finally, check by using line ls:
 ls
 
 ######Question 1b/ Modify the code so the program stops when it reads the character sequence ‘taa’ and it has read at least 9 characters already:
@@ -93,7 +91,6 @@ egrep '^[[:alpha:]]+ {1,}[[:alpha:]]+ {1,}[[:alpha:]]+ {0,}+$' Ex112.txt
    #  {0,} means that there could be or could not be space there
    
 
-
 ###### Question3b/ 11.3 Find Negative Interger: pattern that matches a negative integer
 # First we prepare input
 nano 113.txt
@@ -115,6 +112,7 @@ nano 113.txt
 # After done Excute Ctrl+s and Ctrl+x
 # Then type code
 grep -E '^-[0-9]+' test2.txt | grep -vE [.]
+
 # -E and -vE is the exended version of e when you combine the condition of ‘grep -E’ (match) ‘grep -vE’(unmatch)
 # With grep -E ‘^-[0-9]’, we try to match negative number start with minus sign and come with number after it.
 # With grep -vE [.], we will unmatch number that have decimal point.
@@ -136,9 +134,10 @@ nano 114.txt
 # After done Excute Ctrl+s and Ctrl+x
 # Then type code
 egrep '[[:space:]][-0-9]+\.[0-9]+[[:space:]]' test2.txt
+
 # it will highlight red for the match one with [space][decimal number][space]
-#or Egrep -o to print only the match one 
-Egrep -o '[[:space:]][-0-9]+\.[0-9]+[[:space:]]' test2.txt
+#or egrep -o to print only the match one 
+egrep -o '[[:space:]][-0-9]+\.[0-9]+[[:space:]]' test2.txt
 
 ######3d-11.6/ Match all lines that contain the word “hydrogenase” but omit all lines which contain the word “dehydrogenase”.
 # First we prepare input
