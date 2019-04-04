@@ -81,7 +81,7 @@ one two
 
 # After done Excute Ctrl+s and Ctrl+x
 # If we want: [Words][Space][Words][Space][Words]
-egrep '^[[:alpha:]]+ [[:alpha:]]+ [[:alpha:]]+$' Ex112.txt
+egrep '^[[:alpha:]]+ [[:alpha:]]+ [[:alpha:]]+$' 112.txt
    #^[[:alpha:]] means it have to begin with words (ABCabc)
    #[[:alpha:]]+ means it could have one ore more characters in one word.
    #[[:alpha:]]+ [[:alpha:]]+ means there is a space between words.
