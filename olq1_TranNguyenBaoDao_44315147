@@ -1,0 +1,163 @@
+
+######Question 1a Download W¨unschiers’ script triplet-stop.sh to AWS account
+# First go to AWS account from GIT our laptop:
+ssh -i 44315147.pem ubuntu@ec2-54-206-36-120.ap-southeast-2.compute.amazonaws.com
+#replace with your .pem
+
+# Then, download the file by using#The file is now executable and editable.
+#Next we use,  we open Vim editor.
+vim  chapter-10-shell-programming--triplet-stop.sh
+#Then, we edit : || [${1:$x:3} == tga ] into && [ $x >= 6 ]
+wget 'https://www.staff.hs-mittweida.de/~wuenschi/data/media/compbiolbook/chapter-10-shell-programming--triplet-stop.sh'
+#Finally, check by using line: ls.
+ls
+
+######Question 1b/ Modify the code so the program stops when it reads the character sequence ‘taa’ and it has read at least 9 characters already:
+#First, use: ls - lh to check the status of the file. We need it to be executable and editable. 
+ls - lh
+#If it not, we will use to change it into what we need:
+chmod 777 chapter-10-shell-programming--triplet-stop.sh
+#Then, Use ls -lh again to check
+ls -lh
+#The file is now executable and editable.
+#Next we use,  we open Vim editor.
+vim  chapter-10-shell-programming--triplet-stop.sh
+#Then, we edit as :
+
+###/in the Vim editor. Use I to begin edit
+#!/bin/bash
+# save as triplet-stop.sh
+# splits a sequence into triplets
+x=0
+while [ -n "${1:$x:3}" ]; do
+  seq=$seq${1:$x:3}" "
+  x=$(expr $x + 3)
+  if [ $x -gt 6 ] && [ ${1:$x:3} == taa ] ; then
+    break
+  fi
+done
+
+if [ $x -lt 9 ]; then
+echo 'Error! The iput must be larger than 9 characters'
+else
+echo "$seq"
+fi
+###/in the Vim editor. Use Esc and then :x to save and exit
+
+# Now, we executed the code:
+./chapter-10-shell-programming--triplet-stop.sh caataataagha
+./chapter-10-shell-programming--triplet-stop.sh caataataataa
+./chapter-10-shell-programming--triplet-stop.sh caataataaghatcataagha
+./chapter-10-shell-programming--triplet-stop.sh caataa
+
+
+###### Question 2a: Upload your file into your AWS account
+#First in GIT #Using ls to check whether you have the file
+ls
+# If the file is not in the list, use code pwd to know where we should copy the file download from ilearn to.
+pwd
+#Then, executing the code to secure copy (or upload) the file from our computer to AWS cloud:
+$ scp -i 44315147.pem tutes.txt ubuntu@ec2-54-206-36-120.ap-southeast-2.compute.amazonaws.com:
+#After that, go back to AWS and execute ls to check whether the file is available:
+ls
+
+
+######Question 2b/ To find all unique word from the file tutes.txt, we use the following code
+cat tutes.txt |  # to read file
+grep -oE '\w+' | #to get all words from file
+sort | # sort by alphabet
+uniq -c | # output only each word only 1 time
+sort -nr #sort the output by frequencies and print output.
+
+
+
+######Question3a/ 11.2 Regular expression that matches a line with exactly three space-separated fields (words)
+nano 112.txt # First we prepare input
+
+### inside nano
+one two three
+one     two    three   
+one two three four
+one two
+### inside nano
+
+# After done Excute Ctrl+s and Ctrl+x
+# If we want: [Words][Space][Words][Space][Words]
+egrep '^[[:alpha:]]+ [[:alpha:]]+ [[:alpha:]]+$' Ex112.txt
+   #^[[:alpha:]] means it have to begin with words (ABCabc)
+   #[[:alpha:]]+ means it could have one ore more characters in one word.
+   #[[:alpha:]]+ [[:alpha:]]+ means there is a space between words.
+# If we want: [Words][Spaces][Words][Spaces][Words][Spaces]
+egrep '^[[:alpha:]]+ {1,}[[:alpha:]]+ {1,}[[:alpha:]]+ {0,}+$' Ex112.txt
+   #  {1,} means that there have to be at least 1 space there
+   #  {0,} means that there could be or could not be space there
+   
+
+
+###### Question3b/ 11.3 Find Negative Interger: pattern that matches a negative integer
+# First we prepare input
+nano 113.txt
+
+### inside nano
+123
+-12309
+182389
+-123.234
+1239.123234
+-23.213
+23
+-1293.213
+-55.123
+-12093.123
+-3323
+### inside nano
+
+# After done Excute Ctrl+s and Ctrl+x
+# Then type code
+grep -E '^-[0-9]+' test2.txt | grep -vE [.]
+# -E and -vE is the exended version of e when you combine the condition of ‘grep -E’ (match) ‘grep -vE’(unmatch)
+# With grep -E ‘^-[0-9]’, we try to match negative number start with minus sign and come with number after it.
+# With grep -vE [.], we will unmatch number that have decimal point.
+
+
+
+######Question 3c/ 11.4 Find Negative decimal surrounded with space:
+# First we prepare input
+nano 114.txt
+
+### inside nano
+123
+  -12309
+  182389  2232
+    123.234   1239.123234
+-23.213 23 -1293.213  -55.123 -12093.123
+-23 -24 -25
+### inside nano
+# After done Excute Ctrl+s and Ctrl+x
+# Then type code
+egrep '[[:space:]][-0-9]+\.[0-9]+[[:space:]]' test2.txt
+# it will highlight red for the match one with [space][decimal number][space]
+#or Egrep -o to print only the match one 
+Egrep -o '[[:space:]][-0-9]+\.[0-9]+[[:space:]]' test2.txt
+
+######3d-11.6/ Match all lines that contain the word “hydrogenase” but omit all lines which contain the word “dehydrogenase”.
+# First we prepare input
+nano 116.txt
+### inside nano
+what is hydrogenase
+
+We donot know
+
+because we study actuary we dont know hydrogenase
+
+
+hydrogenase may be the opposite of dehydrogenase
+
+### inside nano
+
+# After done Excute Ctrl+s and Ctrl+x,  Then type:
+grep -Ew 'hydrogenase' 116.txt | grep -vEw 'dehydrogenase'
+
+# -Ew and -vEw is the exended version of ew when you combine the condition of ‘grep -Ew’ (match) ‘grep -vEw’(unmatch), and it will print the whole line of the line that have match result. 
+# With grep -Ew 'hydrogenase', we try to match ‘hydrogenase'
+# With grep -vEw 'dehydrogenase', we will unmatch ‘dehydrogenase'.
