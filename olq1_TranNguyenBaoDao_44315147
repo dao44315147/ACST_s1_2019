@@ -55,7 +55,7 @@ ls
 # If the file is not in the list, use code pwd to know where we should copy the file download from ilearn to.
 pwd
 #Then, executing the code to secure copy (or upload) the file from our computer to AWS cloud:
-$ scp -i 44315147.pem tutes.txt ubuntu@ec2-54-206-36-120.ap-southeast-2.compute.amazonaws.com:
+scp -i 44315147.pem tutes.txt ubuntu@ec2-54-206-36-120.ap-southeast-2.compute.amazonaws.com:
 #After that, go back to AWS and execute ls to check whether the file is available:
 ls
 
