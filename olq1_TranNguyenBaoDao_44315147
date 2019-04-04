@@ -86,7 +86,7 @@ egrep '^[[:alpha:]]+ [[:alpha:]]+ [[:alpha:]]+$' 112.txt
    #[[:alpha:]]+ means it could have one ore more characters in one word.
    #[[:alpha:]]+ [[:alpha:]]+ means there is a space between words.
 # If we want: [Words][Spaces][Words][Spaces][Words][Spaces]
-egrep '^[[:alpha:]]+ {1,}[[:alpha:]]+ {1,}[[:alpha:]]+ {0,}+$' Ex112.txt
+egrep '^[[:alpha:]]+ {1,}[[:alpha:]]+ {1,}[[:alpha:]]+ {0,}+$' 112.txt
    #  {1,} means that there have to be at least 1 space there
    #  {0,} means that there could be or could not be space there
    
