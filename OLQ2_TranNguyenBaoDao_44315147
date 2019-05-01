@@ -1,0 +1,39 @@
+a/ # Download structure.pdb into AWS account:
+wget http://www.staff.hs-mittweida.de/~wuenschi/data/media/compbiolbook/chapter-11-regex--structure.pdb
+# Check File
+ls
+# Change Beisel’s name to Weisel
+sed -n 's/Beisel/Weisel/gp' chapter-11-regex--structure.pdb
+
+
+#b/ Delete the first three lines:
+sed '1,3d' chapter-11-regex--structure.pdb
+
+
+#c/ Print only lines 5 through 10:
+sed -n '5,10p' chapter-11-regex--structure.pdb
+
+
+#d/ Delete lines containing the word MET:
+sed '/MET/d' chapter-11-regex--structure.pdb
+
+
+#e/ Print all lines where the HELIX line contains the word ILE
+sed -n '/HELIX.*ILE/p' chapter-11-regex--structure.pdb
+
+
+#f/ Append three stars to the end of lines starting with “H”
+sed '/^H/s/$/***/' chapter-11-regex--structure.pdb
+
+
+#g/ Replace the lines containing SEQRES with SEQ
+sed '/SEQRES/s/^.*$/SEQ/' chapter-11-regex--structure.pdb
+
+
+#f/
+# Uploaded jabberwocky.txt from GIT, First download the file to your computer in your working directory of git, then use code:
+scp -i 44315147.pem jabberwocky.txt ubuntu@ec2-54-206-36-120.ap-southeast-2.compute.amazonaws.com:
+# Check file in AWS: 
+ls
+# Delete all blank lines of file jabberwocky.txt
+sed '/^.$/d' jabberwocky.txt
