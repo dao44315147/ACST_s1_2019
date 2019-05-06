@@ -1,0 +1,124 @@
+# Question 1:
+# IN git
+scp -i 44315147.pem twain.txt ubuntu@ec2-54-206-36-120.ap-southeast-2.compute.amazonaws.com:
+# In urbuntu
+ls
+python3
+# In python
+twain = open('twain.txt', 'r').read().replace('Huck ','HucK ')
+result = twain.find('HucK ') 
+print ("word 'HucK' found at index:", result )
+print(twain[15000:15500])
+
+# Question 2:
+wget 'https://introcs.cs.princeton.edu/python/code/stdio.py'
+
+nano userargument.py
+#inside nano
+import  sys
+import  stdio
+
+stdio.write('Hi , ')
+stdio.write(sys.argv[1])
+stdio.writeln('. How are you ?')
+
+python3 userargument.py python #a
+python3 userargument.py @!&^% #b
+python3 userargument.py 1234 #c
+python3 userargument.py Bob #d
+userargument.py Bob #e
+python3 userargument.py Alice Bob #f
+
+# Question 3:
+nano question3.py
+#inside nano
+year = int(input('input year for checking: '))
+if year % 400 == 0:
+	print('leap year in Gregorian calendar')
+elif year % 100 == 0:
+	print('not a leap year in Gregorian calendar')
+elif year % 4 == 0:
+	print('leap year in Gregorian calendar')
+else:
+	print('not a leap year in Gregorian calendar')
+
+#Example:
+python3 question3.py
+2010 
+
+python3 question3.py
+2005
+
+python3 question3.py
+1000
+
+python3 question3.py
+4000
+
+#Question 4:
+
+nano question4.py
+#inside nano
+import random
+a = int(input('write your lower bound a '))
+b = int(input('write your upper bound b '))
+r = random.randint(a,b)
+print('the generated random number is', r)
+
+#Example:
+python3 question4.py
+10
+50
+
+#Question 5
+
+nano question5.py
+#Inside nano
+d = int(input('input day '))
+m = int(input('input month '))
+if 3 < m < 6:
+	print('True')
+elif 3 == m and d > 20:
+	print('True')
+elif 6 == m and d < 20:
+	print('True')
+else:
+	print('False')
+
+#Example:
+#Check for 5 March
+python3 question5.py
+5
+3
+#Check for 21 March
+python3 question5.py
+21
+3
+
+#Check for 13 June
+python3 question5.py
+13
+6
+
+#Check for 5 August
+python3 question5.py
+5
+8
+
+#Question 6:
+nano question6.py
+#Inside nano
+import math
+t = float(input('input your time '))
+P = float(input('input your Principal '))
+r = float(input('input the interest rate '))
+F = P* math.exp(r*t)
+print('the desire value is', F)
+
+
+#Example: Check with time = 10, principle = 20 and interest rate = 2.5%
+python3 question6.py
+10
+20
+0.025
+
